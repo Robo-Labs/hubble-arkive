@@ -1,4 +1,4 @@
-export const ClearingHouse = [{
+export const CLEARING_HOUSE = [{
   "anonymous": false,
   "inputs": [{
     "indexed": true,

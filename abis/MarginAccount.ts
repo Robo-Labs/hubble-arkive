@@ -1,4 +1,4 @@
-export const MarginAccount = [{
+export const MARGIN_ACCOUNT = [{
   "inputs": [{
     "internalType": "address",
     "name": "_trustedForwarder",

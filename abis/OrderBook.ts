@@ -1,4 +1,4 @@
-export const OrderBook = [{
+export const ORDER_BOOK = [{
   "inputs": [{
     "internalType": "address",
     "name": "_clearingHouse",

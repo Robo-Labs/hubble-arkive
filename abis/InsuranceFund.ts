@@ -1,4 +1,4 @@
-export const InsuranceFund = [{
+export const INSURANCE_FUND = [{
   "anonymous": false,
   "inputs": [{
     "indexed": true,

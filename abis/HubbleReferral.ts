@@ -1,4 +1,4 @@
-export const HubbleReferral = [{
+export const HUBBLE_REFERRAL = [{
   "anonymous": false,
   "inputs": [{
     "indexed": true,

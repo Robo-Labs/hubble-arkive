@@ -1,6 +1,6 @@
-import { mainnetConfig } from "../config/mainnet.ts";
+import { hubbleConfig } from "../config/hubble.ts";
 
-const marketToId = mainnetConfig.contracts.amms.reduce((acc, amm, idx) => {
+const marketToId = hubbleConfig.contracts.amms.reduce((acc, amm, idx) => {
   acc[amm.perp] = idx;
   return acc;
 }, {} as Record<string, number>);

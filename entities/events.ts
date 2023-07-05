@@ -6,7 +6,7 @@ export const positionModifiedEvent = createEntity<
     type: string;
     timestamp: number;
     trader: string;
-    market: string;
+    market: number;
     orderHash: string;
     args: {
       baseAsset: number;
@@ -27,9 +27,9 @@ export const positionModifiedEvent = createEntity<
   {
     ...baseEvent,
     type: String,
-    timestamp: Number,
+    timestamp: { type: Number, index: true },
     trader: String,
-    market: String,
+    market: Number,
     orderHash: String,
     args: {
       baseAsset: Number,

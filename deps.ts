@@ -1,11 +1,13 @@
 export {
   type Abi,
+  createPublicClient,
   decodeEventLog,
   type DecodeEventLogReturnType,
   encodeEventTopics,
   formatUnits,
   getContract,
   type GetContractReturnType,
+  http,
   type TransactionReceipt,
 } from "npm:viem";
 export { type ExtractAbiEventNames } from "npm:abitype";
@@ -16,4 +18,4 @@ export {
   type EventHandlerFor,
   GraphQLError,
   Manifest,
-} from "../../robo-arkiver/mod.ts";
+} from "../robo-arkiver/mod.ts";

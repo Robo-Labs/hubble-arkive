@@ -1,29 +1,11 @@
-export const mainnetConfig = {
-  "mongo": {
-    "db": "mainnet",
-  },
-  "providers": [
-    "https://avalanche-mainnet.infura.io/v3/INFURA_API_KEY",
-    "https://api.avax.network/ext/bc/C/rpc",
-  ],
-  "wsProviders": [
-    "wss://api.avax.network/ext/bc/C/ws",
-  ],
-  "genesisBlock": 18291062,
-  "timestamp": 1659792695,
+export const hubbleConfig = {
+  "rpcUrl":
+    "https://hubblenext-archive-rpc.hubble.exchange/ext/bc/iKMFgo49o4X3Pd3UWUkmPwjKom3xZz3Vo6Y1kkwL2Ce6DZaPm/rpc",
   "contracts": {
-    "ClearingHouse": "0x4E3535964Cb5612a466d8bb25362d485452eFcEF",
-    "HubbleViewer": "0x690EB0F0D9ddC1D3Df1a5E123000B95b8E708447",
-    "MarginAccount": "0x7648675cA85DfB9e2F9C764EbC5e9661ef46055D",
-    "Oracle": "0x7511E2ccAe82CdAb12d51F0d1519ad5450F157De",
-    "InsuranceFund": "0x870850A72490379f60A4924Ca64BcA89a6D53a9d",
-    "Registry": "0xfD704bc28097f1065640022Bee386985bDbc4122",
-    "Leaderboard": "0xF2dd88707f2Abd2410593e341d1f67D031e507Fa",
-    "BatchLiquidator": "0xeAAFe319454d7bE5C8E5f9Aa5585BeeBAa1BB727",
-    "MarginAccountHelper": "0x9Cff75010B16404F2cD58556Db317607A1eebfc5",
-    "HubbleReferral": "0x27f48404f6951702EAB36930a6671c459faC0B20",
-    "usdc": "0xB97EF9Ef8734C71904D8002F8b6Bc66Dd9c48a6E",
-    "vusd": "0x5c6FC0AaF35A55E7a43Fff45575380bCEdb5Cbc2",
+    "OrderBook": "0x0300000000000000000000000000000000000000",
+    "ClearingHouse": "0x0300000000000000000000000000000000000002",
+    "MarginAccount": "0x0300000000000000000000000000000000000001",
+    "HubbleViewer": "0xa1e7b5ffD6FC7261f770d8A190104ED23255aFf2",
     "amms": [
       {
         "perp": "AVAX-PERP",
