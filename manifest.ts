@@ -4,7 +4,7 @@ import {
   positionModifiedHandler,
 } from "./handlers/clearingHouse/positionModified.ts";
 import { positionModifiedEvent } from "./entities/events.ts";
-import { hourlyMarketApyResolver } from "./queries/apy.ts";
+import { marketResolver } from "./queries/market.ts";
 import { referralBonusAddedHandler } from "./handlers/clearingHouse/referralBonusAdded.ts";
 import { fundingPaidHandler } from "./handlers/clearingHouse/fundingPaid.ts";
 import { fundingRateUpdatedHandler } from "./handlers/clearingHouse/fundingRateUpdated.ts";
@@ -23,6 +23,7 @@ import { pnlRealizedHandler } from "./handlers/marginAccount/pnlRealized.ts";
 import { marginLiquidationsHandler } from "./handlers/marginAccount/marginLiquidations.ts";
 import { INSURANCE_FUND } from "./abis/InsuranceFund.ts";
 import { insuranceFundEventHandler } from "./handlers/insuranceFund/insuranceFundEvent.ts";
+import { refreshChartsHandler } from "./handlers/refreshCharts.ts";
 
 export default new Manifest("hubble-arkive")
   .addChain("hubble", (chain) => {
@@ -83,19 +84,35 @@ export default new Manifest("hubble-arkive")
           FundsAdded: insuranceFundEventHandler,
           FundsWithdrawn: insuranceFundEventHandler,
         },
+      })
+      .addBlockHandler({
+        blockInterval: 150,
+        handler: refreshChartsHandler,
+        startBlockHeight: "live",
       });
   })
   .addEntities([
     positionModifiedEvent,
   ])
   .extendSchema((schemaComposer) => {
+    schemaComposer
+      .createObjectTC({
+        name: "Market",
+        fields: {
+          trades: "JSON",
+          perp: "String",
+          change: "Float",
+          tradeVol: "Float",
+          predictedFR: "Float",
+        },
+      });
     schemaComposer.Query.addFields({
-      MarketHourlyApy: {
-        type: "Float",
+      market: {
+        type: "Market",
         args: {
           market: "String!",
         },
-        resolve: hourlyMarketApyResolver,
+        resolve: marketResolver,
       },
     });
   })

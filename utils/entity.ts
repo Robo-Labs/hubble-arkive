@@ -7,9 +7,9 @@ export interface IBaseEvent {
 }
 
 export const baseEvent = {
-  blockNumber: Number,
+  blockNumber: { type: Number, index: true },
   blockHash: String,
   transactionHash: String,
   transactionIndex: Number,
-  logIndex: Number,
+  logIndex: { type: Number, index: true },
 };

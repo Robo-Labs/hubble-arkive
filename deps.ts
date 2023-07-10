@@ -14,6 +14,7 @@ export { type ExtractAbiEventNames } from "npm:abitype";
 export { match } from "npm:ts-pattern";
 export { type GraphQLFieldResolver } from "npm:graphql";
 export {
+  type BlockHandler,
   createEntity,
   type EventHandlerFor,
   GraphQLError,
