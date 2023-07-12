@@ -1,7 +1,7 @@
-import { HubbleReferral } from "../../abis/HubbleReferral.ts";
+import { HUBBLE_REFERRAL } from "../../abis/HubbleReferral.ts";
 import { EventHandlerFor } from "../../deps.ts";
 
 export const referrerAddedHandler: EventHandlerFor<
-  typeof HubbleReferral,
+  typeof HUBBLE_REFERRAL,
   "ReferrerAdded"
 > = async (ctx) => {};

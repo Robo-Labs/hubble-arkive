@@ -24,6 +24,7 @@ import { marginLiquidationsHandler } from "./handlers/marginAccount/marginLiquid
 import { INSURANCE_FUND } from "./abis/InsuranceFund.ts";
 import { insuranceFundEventHandler } from "./handlers/insuranceFund/insuranceFundEvent.ts";
 import { refreshChartsHandler } from "./handlers/refreshCharts.ts";
+import { charts1Minute } from "./entities/chart.ts";
 
 export default new Manifest("hubble-arkive")
   .addChain("hubble", (chain) => {
@@ -39,81 +40,82 @@ export default new Manifest("hubble-arkive")
           eventHandlers: {
             PositionModified: positionModifiedHandler,
             PositionLiquidated: positionModifiedHandler,
-            ReferralBonusAdded: referralBonusAddedHandler,
-            FundingRateUpdated: fundingRateUpdatedHandler,
-            FundingPaid: fundingPaidHandler,
+            // ReferralBonusAdded: referralBonusAddedHandler,
+            // FundingRateUpdated: fundingRateUpdatedHandler,
+            // FundingPaid: fundingPaidHandler,
           },
           sources: {
             [hubbleConfig.contracts.ClearingHouse]: 1n,
           },
         },
       )
-      .addContract({
-        name: "OrderBook",
-        abi: ORDER_BOOK,
-        eventHandlers: {
-          OrderPlaced: orderPlacedHandler,
-          OrdersMatched: ordersMatchedHandler,
-          OrderMatchingError: orderMatchingErrorHandler,
-          LiquidationOrderMatched: liquidationOrderMatchedHandler,
-          OrderCancelled: orderCancelledHandler,
-        },
-      })
-      .addContract({
-        name: "HubbleReferral",
-        abi: HUBBLE_REFERRAL,
-        eventHandlers: {
-          ReferrerAdded: referrerAddedHandler,
-        },
-      })
-      .addContract({
-        name: "MarginAccount",
-        abi: MARGIN_ACCOUNT,
-        eventHandlers: {
-          MarginAdded: marginEventHandler,
-          MarginRemoved: marginEventHandler,
-          PnLRealized: pnlRealizedHandler,
-          MarginAccountLiquidated: marginLiquidationsHandler,
-          SettledBadDebt: marginLiquidationsHandler,
-        },
-      })
-      .addContract({
-        name: "InsuranceFund",
-        abi: INSURANCE_FUND,
-        eventHandlers: {
-          FundsAdded: insuranceFundEventHandler,
-          FundsWithdrawn: insuranceFundEventHandler,
-        },
-      })
+      // .addContract({
+      //   name: "OrderBook",
+      //   abi: ORDER_BOOK,
+      //   eventHandlers: {
+      //     OrderPlaced: orderPlacedHandler,
+      //     OrdersMatched: ordersMatchedHandler,
+      //     OrderMatchingError: orderMatchingErrorHandler,
+      //     LiquidationOrderMatched: liquidationOrderMatchedHandler,
+      //     OrderCancelled: orderCancelledHandler,
+      //   },
+      // })
+      // .addContract({
+      //   name: "HubbleReferral",
+      //   abi: HUBBLE_REFERRAL,
+      //   eventHandlers: {
+      //     ReferrerAdded: referrerAddedHandler,
+      //   },
+      // })
+      // .addContract({
+      //   name: "MarginAccount",
+      //   abi: MARGIN_ACCOUNT,
+      //   eventHandlers: {
+      //     MarginAdded: marginEventHandler,
+      //     MarginRemoved: marginEventHandler,
+      //     PnLRealized: pnlRealizedHandler,
+      //     MarginAccountLiquidated: marginLiquidationsHandler,
+      //     SettledBadDebt: marginLiquidationsHandler,
+      //   },
+      // })
+      // .addContract({
+      //   name: "InsuranceFund",
+      //   abi: INSURANCE_FUND,
+      //   eventHandlers: {
+      //     FundsAdded: insuranceFundEventHandler,
+      //     FundsWithdrawn: insuranceFundEventHandler,
+      //   },
+      // })
       .addBlockHandler({
         blockInterval: 150,
         handler: refreshChartsHandler,
-        startBlockHeight: "live",
+        startBlockHeight: 1n,
       });
   })
   .addEntities([
     positionModifiedEvent,
+    charts1Minute,
   ])
-  .extendSchema((schemaComposer) => {
-    schemaComposer
-      .createObjectTC({
-        name: "Market",
-        fields: {
-          trades: "JSON",
-          perp: "String",
-          change: "Float",
-          tradeVol: "Float",
-          predictedFR: "Float",
-        },
-      });
-    schemaComposer.Query.addFields({
-      market: {
-        type: "Market",
-        args: {
-          market: "String!",
-        },
-        resolve: marketResolver,
-      },
-    });
-  })
+  // .extendSchema((schemaComposer) => {
+  //   schemaComposer
+  //     .createObjectTC({
+  //       name: "Market",
+  //       fields: {
+  //         trades: "JSON",
+  //         perp: "String",
+  //         change: "Float",
+  //         tradeVol: "Float",
+  //         predictedFR: "Float",
+  //       },
+  //     });
+  //   schemaComposer.Query.addFields({
+  //     market: {
+  //       type: "Market",
+  //       args: {
+  //         market: "String!",
+  //       },
+  //       resolve: marketResolver,
+  //     },
+  //   });
+  // })
   .build();
