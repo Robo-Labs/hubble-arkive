@@ -4,25 +4,25 @@ import {
   positionModifiedHandler,
 } from "./handlers/clearingHouse/positionModified.ts";
 import { positionModifiedEvent } from "./entities/events.ts";
-import { marketResolver } from "./queries/market.ts";
-import { referralBonusAddedHandler } from "./handlers/clearingHouse/referralBonusAdded.ts";
-import { fundingPaidHandler } from "./handlers/clearingHouse/fundingPaid.ts";
-import { fundingRateUpdatedHandler } from "./handlers/clearingHouse/fundingRateUpdated.ts";
+// import { marketResolver } from "./queries/market.ts";
+// import { referralBonusAddedHandler } from "./handlers/clearingHouse/referralBonusAdded.ts";
+// import { fundingPaidHandler } from "./handlers/clearingHouse/fundingPaid.ts";
+// import { fundingRateUpdatedHandler } from "./handlers/clearingHouse/fundingRateUpdated.ts";
 import { hubbleConfig } from "./config/hubble.ts";
-import { ORDER_BOOK } from "./abis/OrderBook.ts";
-import { liquidationOrderMatchedHandler } from "./handlers/orderBook/liquidationOrderMatched.ts";
-import { orderCancelledHandler } from "./handlers/orderBook/orderCancelled.ts";
-import { orderMatchingErrorHandler } from "./handlers/orderBook/orderMatchingError.ts";
-import { orderPlacedHandler } from "./handlers/orderBook/orderPlaced.ts";
-import { ordersMatchedHandler } from "./handlers/orderBook/ordersMatched.ts";
-import { HUBBLE_REFERRAL } from "./abis/HubbleReferral.ts";
-import { referrerAddedHandler } from "./handlers/hubbleReferral/referrerAdded.ts";
-import { MARGIN_ACCOUNT } from "./abis/MarginAccount.ts";
-import { marginEventHandler } from "./handlers/marginAccount/marginEvent.ts";
-import { pnlRealizedHandler } from "./handlers/marginAccount/pnlRealized.ts";
-import { marginLiquidationsHandler } from "./handlers/marginAccount/marginLiquidations.ts";
-import { INSURANCE_FUND } from "./abis/InsuranceFund.ts";
-import { insuranceFundEventHandler } from "./handlers/insuranceFund/insuranceFundEvent.ts";
+// import { ORDER_BOOK } from "./abis/OrderBook.ts";
+// import { liquidationOrderMatchedHandler } from "./handlers/orderBook/liquidationOrderMatched.ts";
+// import { orderCancelledHandler } from "./handlers/orderBook/orderCancelled.ts";
+// import { orderMatchingErrorHandler } from "./handlers/orderBook/orderMatchingError.ts";
+// import { orderPlacedHandler } from "./handlers/orderBook/orderPlaced.ts";
+// import { ordersMatchedHandler } from "./handlers/orderBook/ordersMatched.ts";
+// import { HUBBLE_REFERRAL } from "./abis/HubbleReferral.ts";
+// import { referrerAddedHandler } from "./handlers/hubbleReferral/referrerAdded.ts";
+// import { MARGIN_ACCOUNT } from "./abis/MarginAccount.ts";
+// import { marginEventHandler } from "./handlers/marginAccount/marginEvent.ts";
+// import { pnlRealizedHandler } from "./handlers/marginAccount/pnlRealized.ts";
+// import { marginLiquidationsHandler } from "./handlers/marginAccount/marginLiquidations.ts";
+// import { INSURANCE_FUND } from "./abis/InsuranceFund.ts";
+// import { insuranceFundEventHandler } from "./handlers/insuranceFund/insuranceFundEvent.ts";
 import { refreshChartsHandler } from "./handlers/refreshCharts.ts";
 import { charts1Minute } from "./entities/chart.ts";
 
@@ -89,7 +89,7 @@ export default new Manifest("hubble-arkive")
       .addBlockHandler({
         blockInterval: 150,
         handler: refreshChartsHandler,
-        startBlockHeight: 1n,
+        startBlockHeight: 150n,
       });
   })
   .addEntities([

@@ -3,7 +3,7 @@ import { charts1Minute } from "../entities/chart.ts";
 import { positionModifiedEvent } from "../entities/events.ts";
 import { marketIds } from "../utils/market.ts";
 
-export const refreshChartsHandler: BlockHandler = async (ctx) => {
+export const refreshChartsHandler: BlockHandler = async (_ctx) => {
   const markets = marketIds;
 
   for (const market of markets) {
@@ -12,12 +12,12 @@ export const refreshChartsHandler: BlockHandler = async (ctx) => {
     );
     let start;
     if (docs.length) {
-      start = docs[0].start;
+      start = docs[0].end;
     } else {
       start = 1646092800;
     }
 
-    positionModifiedEvent.aggregate([
+    const agg = await positionModifiedEvent.aggregate([
       {
         $match: {
           $or: [{ type: "PositionModified", "args.executionMode": "Taker" }, {
@@ -42,7 +42,7 @@ export const refreshChartsHandler: BlockHandler = async (ctx) => {
                 },
               },
               unit: "minute",
-              binsize: 1,
+              binSize: 1,
             },
           },
           count: { $sum: 1 },
@@ -71,15 +71,8 @@ export const refreshChartsHandler: BlockHandler = async (ctx) => {
         },
       },
       { $unset: "_id" },
-      {
-        $merge: {
-          into: charts1Minute.modelName,
-          on: "start",
-          whenMatched: "replace",
-        },
-      },
-    ]).then((agg) => {
-      ctx.logger.info(`Completed ${market}: ${agg.length} records`);
-    });
+    ]);
+
+    charts1Minute.insertMany(agg);
   }
 };
