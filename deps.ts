@@ -19,4 +19,4 @@ export {
   type EventHandlerFor,
   GraphQLError,
   Manifest,
-} from "../robo-arkiver/mod.ts";
+} from "https://deno.land/x/robo_arkiver/mod.ts";
